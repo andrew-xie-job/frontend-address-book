@@ -16,7 +16,7 @@ class AddressBookApp extends Component {
                             <Route path="/" exact component={ListAddressBookComponent} />
                             <Route path="/addressBooks/:bookName/" component={ListContactComponent} />
                             <Route path="/addressBook/contact" component={ContactComponent}/>
-                            <Route path="/addressBooks/unique/contacts" component={ListUniqueContactsComponent}/>
+                            <Route path="/unique/contacts" component={ListUniqueContactsComponent}/>
                         </Switch>
                     </>
                 </Router>

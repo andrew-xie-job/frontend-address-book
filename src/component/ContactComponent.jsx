@@ -33,9 +33,11 @@ class ContactComponent extends Component {
         let errors = {};
         if (!values.addressBookName) {
             errors.addressBookName = 'Enter a Address Book Name'
-        } else if (!values.contactName) {
+        }
+        if (!values.contactName) {
             errors.contactName = 'Enter a Contact Name'
-        } else if (!values.phoneNumber) {
+        }
+        if (!values.phoneNumber) {
             errors.phoneNumber = 'Enter a Phone Number'
         }
         return errors
@@ -60,8 +62,10 @@ class ContactComponent extends Component {
                         {
                             (props) => (
                                 <Form>
-                                    <ErrorMessage name="description" component="div"
+                                    <ErrorMessage name="addressBookName" component="div"
                                                   className="alert alert-warning"/>
+                                    <ErrorMessage name="contactName" component="div" className="alert alert-warning"/>
+                                    <ErrorMessage name="phoneNumber" component="div" className="alert alert-warning"/>
                                     <fieldset className="form-group">
                                         <label>Address Book Name</label>
                                         <Field className="form-control" type="text" name="addressBookName"/>

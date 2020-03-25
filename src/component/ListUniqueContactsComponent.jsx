@@ -26,14 +26,14 @@ class ListUniqueContactsComponent extends Component {
             .then(
                 response => {
                     //console.log(response);
-                    this.setState({ contactNames: response.data })
+                    this.setState({contactNames: response.data})
                 }
             );
         console.log(values);
     }
 
     validate(values) {
-        let errors = {}
+        let errors = {};
         if (!values.addressBookName1) {
             errors.addressBookName1 = 'Enter a Address Book Name'
         }
@@ -45,14 +45,14 @@ class ListUniqueContactsComponent extends Component {
 
     render() {
 
-        let {contactName} = this.state;
+        let {addressBookName1, addressBookName2} = this.state;
 
         return (
             <div>
                 <h3>Contact</h3>
                 <div className="container">
                     <Formik
-                        initialValues={{contactName}}
+                        initialValues={{addressBookName1, addressBookName2}}
                         onSubmit={this.onSubmit}
                         validateOnChange={false}
                         validateOnBlur={false}
@@ -62,7 +62,9 @@ class ListUniqueContactsComponent extends Component {
                         {
                             (props) => (
                                 <Form>
-                                    <ErrorMessage name="Address Book Name" component="div"
+                                    <ErrorMessage name="addressBookName1" component="div"
+                                                  className="alert alert-warning"/>
+                                    <ErrorMessage name="addressBookName2" component="div"
                                                   className="alert alert-warning"/>
                                     <fieldset className="form-group">
                                         <label>Address Book Name 1</label>
