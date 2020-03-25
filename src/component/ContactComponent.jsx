@@ -30,14 +30,12 @@ class ContactComponent extends Component {
     }
 
     validate(values) {
-        let errors = {}
+        let errors = {};
         if (!values.addressBookName) {
             errors.addressBookName = 'Enter a Address Book Name'
-        }
-        if (!values.contactName) {
+        } else if (!values.contactName) {
             errors.contactName = 'Enter a Contact Name'
-        }
-        if (!values.phoneNumber) {
+        } else if (!values.phoneNumber) {
             errors.phoneNumber = 'Enter a Phone Number'
         }
         return errors

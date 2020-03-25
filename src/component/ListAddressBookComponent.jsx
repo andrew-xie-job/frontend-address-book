@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import AddressBookDataService from '../service/AddressBookDataService';
 import ListContactComponent from './ListContactComponent'
-import {BrowserRouter as Router, Route, Link, Switch} from "react-router-dom";
+import {BrowserRouter as Router, Route, Link} from "react-router-dom";
 
 class ListAddressBookComponent extends Component {
     constructor(props) {
@@ -39,11 +39,9 @@ class ListAddressBookComponent extends Component {
                         <ul>
                             {this.state.addressBooks
                                 .map(addressBook => <li key={addressBook}><Link
-                                    to={`/addressBooks/${addressBook}`}>{addressBook}</Link></li>)}
+                                    to={`/addressBooks/${addressBook}/`}>{addressBook}</Link></li>)}
                         </ul>
-                    <Switch>
-                        <Route path="/addressBooks/:bookName" component={ListContactComponent}/>
-                     </Switch>
+                        <Route path="/addressBooks/:bookName/" component={ListContactComponent}/>
                     </div>
                 </div>
             </Router>
