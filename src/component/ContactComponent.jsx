@@ -25,7 +25,7 @@ class ContactComponent extends Component {
         };
 
         AddressBookDataService.createContact(contact)
-            .then(() => this.props.history.push('/addressbook/contacts'));
+            .then(() => this.props.history.push('/'));
         console.log(values);
     }
 
@@ -45,11 +45,11 @@ class ContactComponent extends Component {
 
     render() {
 
-        let {addressBookName, contactName, phoneNumber} = this.state
+        let {addressBookName, contactName, phoneNumber} = this.state;
 
         return (
             <div>
-                <h3>Course</h3>
+                <h3>Contacts</h3>
                 <div className="container">
                     <Formik
                         initialValues={{addressBookName, contactName, phoneNumber}}
