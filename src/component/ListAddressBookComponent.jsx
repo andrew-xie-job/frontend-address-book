@@ -1,7 +1,5 @@
 import React, {Component} from 'react'
 import AddressBookDataService from '../service/AddressBookDataService';
-import ListContactComponent from './ListContactComponent'
-import {BrowserRouter as Router, Route, Link} from "react-router-dom";
 
 class ListAddressBookComponent extends Component {
     constructor(props) {
@@ -12,6 +10,7 @@ class ListAddressBookComponent extends Component {
             message: null
         };
         this.refreshAddressBooks = this.refreshAddressBooks.bind(this);
+        this.lookupClicked = this.lookupClicked.bind(this);
     }
 
     componentDidMount() {
@@ -29,24 +28,43 @@ class ListAddressBookComponent extends Component {
             )
     }
 
+    lookupClicked(name) {
+        this.props.history.push(`/addressBooks/${name}`)
+    }
+
     render() {
+
         return (
-            <Router>
                 <div className="container">
                     <h3>All Address Books</h3>
                     {this.state.message && <div class="alert alert-success">{this.state.message}</div>}
                     <div className="container">
-                        <ul>
-                            {this.state.addressBooks
-                                .map(addressBook => <li key={addressBook}><Link
-                                    to={`/addressBooks/${addressBook}/`}>{addressBook}</Link></li>)}
-                        </ul>
-                        <Route path="/addressBooks/:bookName/" component={ListContactComponent}/>
+                        <table className="table">
+                            <thead>
+                            <tr>
+                                <th>Address Book Name</th>
+                                <th>Lookup</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {
+                                this.state.addressBooks.map(
+                                    addressBook =>
+                                        <tr key={addressBook}>
+                                            <td>{addressBook}</td>
+                                            <td><button className="btn btn-success" onClick={() => this.lookupClicked(addressBook)}>Go</button></td>
+                                        </tr>
+                                )
+                            }
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-            </Router>
+
         )
     }
 }
+
+
 
 export default ListAddressBookComponent;
