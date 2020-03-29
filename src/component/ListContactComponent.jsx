@@ -6,8 +6,7 @@ class ListContactComponent extends Component {
         super(props);
         this.state = {
             bookName: this.props.match.params.bookName,
-            contacts
-                : [],
+            contacts: [],
             message: null
         };
         this.addContactClicked = this.addContactClicked.bind(this)

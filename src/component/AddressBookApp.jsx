@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import ListContactComponent from './ListContactComponent';
 import ListAddressBookComponent from './ListAddressBookComponent';
@@ -9,7 +9,7 @@ import ContactComponent from './ContactComponent';
 class AddressBookApp extends Component {
     render() {
             return (
-                <Router>
+                <BrowserRouter>
                     <>
                         <h1>Address Book Application</h1>
                         <Switch>
@@ -19,7 +19,7 @@ class AddressBookApp extends Component {
                             <Route path="/unique/contacts" component={ListUniqueContactsComponent}/>
                         </Switch>
                     </>
-                </Router>
+                </BrowserRouter>
             )
         }
 }

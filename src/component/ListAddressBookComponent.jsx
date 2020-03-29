@@ -1,13 +1,12 @@
 import React, {Component} from 'react'
 import AddressBookDataService from '../service/AddressBookDataService';
+import {Link} from 'react-router-dom';
 
 class ListAddressBookComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            bookName: this.props.match.params.bookName,
-            addressBooks: [],
-            message: null
+            addressBooks: []
         };
         this.refreshAddressBooks = this.refreshAddressBooks.bind(this);
         this.lookupClicked = this.lookupClicked.bind(this);
@@ -35,36 +34,29 @@ class ListAddressBookComponent extends Component {
     render() {
 
         return (
+            <div className="container">
                 <div className="container">
-                    <h3>All Address Books</h3>
-                    {this.state.message && <div class="alert alert-success">{this.state.message}</div>}
-                    <div className="container">
-                        <table className="table">
-                            <thead>
-                            <tr>
-                                <th>Address Book Name</th>
-                                <th>Lookup</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {
-                                this.state.addressBooks.map(
-                                    addressBook =>
-                                        <tr key={addressBook}>
-                                            <td>{addressBook}</td>
-                                            <td><button className="btn btn-success" onClick={() => this.lookupClicked(addressBook)}>Go</button></td>
-                                        </tr>
-                                )
-                            }
-                            </tbody>
-                        </table>
+                    <div>
+                        <p><Link to={"/unique/contacts"}>Unique Contacts</Link></p>
                     </div>
+                    <br/>
+                    <h3>All Address Books</h3>
+                    <ul>
+                        {
+                            this.state.addressBooks.map(
+                                addressBook =>
+                                    <li key={addressBook}>
+                                        <Link to={`/addressBooks/${addressBook}/`}>{addressBook}</Link>
+                                    </li>
+                            )
+                        }
+                    </ul>
                 </div>
+            </div>
 
         )
     }
 }
-
 
 
 export default ListAddressBookComponent;

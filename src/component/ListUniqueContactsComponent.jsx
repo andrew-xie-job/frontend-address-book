@@ -9,7 +9,8 @@ class ListUniqueContactsComponent extends Component {
 
         this.state = {
             addressBookName1: '',
-            addressBookName2: ''
+            addressBookName2: '',
+            contactNames: [],
         };
 
         this.onSubmit = this.onSubmit.bind(this);
@@ -45,7 +46,7 @@ class ListUniqueContactsComponent extends Component {
 
     render() {
 
-        let {addressBookName1, addressBookName2} = this.state;
+        let {addressBookName1, addressBookName2, contactNames} = this.state;
 
         return (
             <div>
@@ -79,7 +80,12 @@ class ListUniqueContactsComponent extends Component {
                             )
                         }
                     </Formik>
+                </div>
 
+                <div className="container">
+                    <ul>
+                        {contactNames.map(contactName => <li key={contactName}>{contactName}</li>)}
+                    </ul>
                 </div>
             </div>
         )

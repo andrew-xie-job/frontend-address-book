@@ -6,7 +6,6 @@ import AddressBookDataService from '../service/AddressBookDataService';
 class ContactComponent extends Component {
     constructor(props) {
         super(props);
-
         this.state = {
             addressBookName: '',
             contactName: '',
