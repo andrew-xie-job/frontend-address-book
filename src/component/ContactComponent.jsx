@@ -7,16 +7,13 @@ class ContactComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            addressBookName: '',
+            addressBookName: this.props.location.state,
             contactName: '',
             phoneNumber: ''
         };
-
-        this.onSubmit = this.onSubmit.bind(this);
-        this.validate = this.validate.bind(this)
     }
 
-    onSubmit(values) {
+    onSubmit = (values) => {
         let contact = {
             addressBookName: values.addressBookName,
             contactName: values.contactName,
@@ -26,9 +23,9 @@ class ContactComponent extends Component {
         AddressBookDataService.createContact(contact)
             .then(() => this.props.history.push('/'));
         console.log(values);
-    }
+    };
 
-    validate(values) {
+    validate = (values) => {
         let errors = {};
         if (!values.addressBookName) {
             errors.addressBookName = 'Enter a Address Book Name'

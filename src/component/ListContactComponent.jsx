@@ -1,20 +1,20 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import AddressBookDataService from '../service/AddressBookDataService';
+import {bindActionCreators} from "redux";
+import * as actions from "../redux/actions";
+import {withRouter} from 'react-router'
+import {connect} from 'react-redux'
 
 class ListContactComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            bookName: this.props.match.params.bookName,
-            contacts: [],
             message: null
         };
-        this.addContactClicked = this.addContactClicked.bind(this)
-        this.refreshContacts = this.refreshContacts.bind(this)
     }
 
     componentDidMount() {
-        this.refreshContacts(this.state.bookName);
+        this.props.startLoadingContacts(this.props.match.params.bookName);
     }
 
     refreshContacts(bookName) {
@@ -23,18 +23,21 @@ class ListContactComponent extends Component {
             .then(
                 response => {
                     //console.log(response);
-                    this.setState({ contacts: response.data })
+                    this.setState({contacts: response.data})
                 }
             )
     }
 
 
-    addContactClicked() {
-        this.props.history.push(`/addressBook/contact/`)
-    }
+    addContactClicked = () => {
+        this.props.history.push({
+            pathname: `/addressBook/contact/`,
+            state: this.state.bookName
+        })
+    };
 
     render() {
-        console.log('render');
+        let contacts = Object.values(this.props.contacts).flat();
         return (
             <div className="container">
                 <h3>All Contacts</h3>
@@ -49,17 +52,17 @@ class ListContactComponent extends Component {
                         </thead>
                         <tbody>
                         {
-                            this.state.contacts
-                                .map(
-                                    contact =>
-                                    <tr key={contact.name}>
-                                        <td>{contact.name}</td>
-                                        <td>{contact.phoneNumber}</td>
-                                    </tr>
-                            )
+                            contacts.map(
+                                (contact, index) =>
+                                        <tr key={index}>
+                                            <td>{contact.name}</td>
+                                            <td>{contact.phoneNumber}</td>
+                                        </tr>
+                                )
                         }
                         </tbody>
                     </table>
+
                     <div className="row">
                         <button className="btn btn-success" onClick={this.addContactClicked}>Add</button>
                     </div>
@@ -69,4 +72,16 @@ class ListContactComponent extends Component {
     }
 }
 
-export default ListContactComponent
+function mapStateToProps(state) {
+    return {
+        contacts: state.contacts
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators(actions, dispatch)
+}
+
+const connectedContactList = withRouter(connect(mapStateToProps, mapDispatchToProps)(ListContactComponent));
+export {connectedContactList as ListContactComponent};
+

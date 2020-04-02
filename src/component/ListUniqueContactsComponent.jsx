@@ -36,10 +36,10 @@ class ListUniqueContactsComponent extends Component {
     validate(values) {
         let errors = {};
         if (!values.addressBookName1) {
-            errors.addressBookName1 = 'Enter a Address Book Name'
+            errors.addressBookName1 = 'Enter a Address Book Name1'
         }
         if (!values.addressBookName2) {
-            errors.addressBookName2 = 'Enter a Contact Name'
+            errors.addressBookName2 = 'Enter a Address Book Name2'
         }
         return errors
     }
@@ -50,7 +50,7 @@ class ListUniqueContactsComponent extends Component {
 
         return (
             <div>
-                <h3>Contact</h3>
+                <h3>Unique Contacts</h3>
                 <div className="container">
                     <Formik
                         initialValues={{addressBookName1, addressBookName2}}

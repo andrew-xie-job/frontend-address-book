@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
 
-import ListContactComponent from './ListContactComponent';
-import ListAddressBookComponent from './ListAddressBookComponent';
+import {ListContactComponent} from './ListContactComponent';
+import {ListAddressBookComponent} from './ListAddressBookComponent';
 import ListUniqueContactsComponent from './ListUniqueContactsComponent';
 import ContactComponent from './ContactComponent';
 
@@ -11,7 +11,7 @@ class AddressBookApp extends Component {
             return (
                 <BrowserRouter>
                     <>
-                        <h1>Address Book Application</h1>
+                        <h1><Link to={"/"}>Address Book Application</Link></h1>
                         <Switch>
                             <Route path="/" exact component={ListAddressBookComponent} />
                             <Route path="/addressBooks/:bookName/" component={ListContactComponent} />
@@ -23,5 +23,7 @@ class AddressBookApp extends Component {
             )
         }
 }
+
+
 export default AddressBookApp
 
