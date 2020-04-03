@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import AddressBookDataService from '../service/AddressBookDataService';
 import {bindActionCreators} from "redux";
 import * as actions from "../redux/actions";
 import {withRouter} from 'react-router'
@@ -17,18 +16,6 @@ class ListContactComponent extends Component {
         this.props.startLoadingContacts(this.props.match.params.bookName);
     }
 
-    refreshContacts(bookName) {
-        AddressBookDataService
-            .retrieveContacts(bookName)
-            .then(
-                response => {
-                    //console.log(response);
-                    this.setState({contacts: response.data})
-                }
-            )
-    }
-
-
     addContactClicked = () => {
         this.props.history.push({
             pathname: `/addressBook/contact/`,
@@ -37,7 +24,7 @@ class ListContactComponent extends Component {
     };
 
     render() {
-        let contacts = Object.values(this.props.contacts).flat();
+        let contacts = this.props.contacts[this.props.match.params.bookName];
         return (
             <div className="container">
                 <h3>All Contacts</h3>
@@ -52,7 +39,7 @@ class ListContactComponent extends Component {
                         </thead>
                         <tbody>
                         {
-                            contacts.map(
+                            contacts && contacts.map(
                                 (contact, index) =>
                                         <tr key={index}>
                                             <td>{contact.name}</td>
